@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quotes</title>
+</head>
+<body>
+    <div class="header">
+        <a href="/users/dashboard" class='right1'>Home</a>
+        <a href="/logout">Logout</a>  
+    </div> 
+    <h1>Quotes: {{username.first_name}} {{username.last_name}}</h1>
+
+    <h3>This User's Quotes:</h3>
+    {% for q in quotes %}
+    {{q.name}}: {{q.quote}}
+    <p></p>
+    {% endfor %}
+</body>
+</html>

@@ -15,6 +15,71 @@
                 <h1>Hello, {{user.first_name}} {{user.last_name}}</h1>
                 <p>Welcome to your Dashboard!</p>
             </div>
+            <h3>Your Favorite Quotes:</h3>
+            <div class="outer-box-top">
+                <table style="border: 1px solid black">
+                        <tr>
+                            <th>Quote</th>
+                            <th>Posted by</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for g in favorites %}
+                        <tr>
+                            <td>{{g.name}}: {{g.quote}}</td> <!--Item Name -->
+                            <td><a href="/users/{{g.user.id}}">{{g.user.first_name}} {{g.user.last_name}}</a></td>    
+                            {% if request.session.id == g.user.id %}
+                            <td><a href="/users/{{g.id}}/remove">Remove from List</a></td>  
+                            {% endif %}
+                            {% if request.session.id != g.user.id %}
+                            <td><a href="/users/{{g.id}}/remove">Remove from List</a></td> 
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </table>
+            </div>
+
+            <h3>Quoteable Quotes by other Users:</h3>
+            <div class="outer-box-bottom">
+                <table style="border: 1px solid black">
+                    <tr>
+                        <th>Quote:</th>  
+                        <th>Posted By</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for q in quotes %}
+                    <tr>
+                        <td>{{q.name}}: "{{q.quote}}"</td> <!--Quote author and quote--></td>
+                        <td><a href="/users/{{q.user.id}}">{{q.user.first_name}} {{q.user.last_name}}</a></td> 
+                        {% if request.session.id != q.user.id %}
+                        <td><a href="/users/{{q.id}}/add">Add to your List</a></td> <!--If not user: Delete -->
+                        {% endif %}
+                        {% if request.session.id == q.user.id %}
+                        <td><a href="/users/{{q.id}}/add">Add to your List</a></td> <!--If not user: Delete -->
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+           
+            <div class="items">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                <h2>Contribute a Quote!</h2>
+                <form action="/users/create" method="POST">
+                {% csrf_token %}
+                    Quoted By: 
+                    <input type="text" name="name">
+                   Quote: 
+                    <textarea name="quote"></textarea>
+                    <input type="submit" value="Submit!">
+                </form>
+            </div>
         </div>
     </body>
 </html>            

@@ -51,4 +51,15 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     objects = UserManager()
     def __str__(self):
-        return "<User object: {} {} {} {} {}>".format(self.id, self.first_name, self.last_name, self.email, self.password)
+        return "<User object: id:{} fname:{} lname:{} email:{}>".format(self.id, self.first_name, self.last_name, self.email)
+
+
+class Quotes(models.Model):
+    name = models.CharField(max_length=255)
+    quote = models.TextField()
+    user = models.ForeignKey(User, related_name="user_key")
+    others = models.ManyToManyField(User, related_name="quote_item")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return "<Quote object: Name:{} quote:{} user_key:{} others:{}>".format(self.name, self.quote, self.user, self.others)        

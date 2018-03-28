@@ -16,7 +16,9 @@ def dashboard(request):
         return redirect('/')
     else:
         context = {
-            'user': User.objects.get(id=request.session['id'])
+            'user': User.objects.get(id=request.session['id']),
+            'favorites': Quotes.objects.filter(others=request.session['id']),
+            'quotes': Quotes.objects.filter(~Q(others=request.session['id']))
         }
         return render(request, 'exam/dashboard.html', context)     
 
@@ -47,3 +49,43 @@ def login(request):
 def logout(request):
     request.session.clear()
     return redirect('/')   
+
+# create a new item from dashboard page, GET
+def create(request):   
+    if request.POST['name']:
+        item = Quotes.objects.create(name=request.POST['name'], quote=request.POST['quote'], user=User.objects.get(id=request.session['id']))
+        this_item = Quotes.objects.get(name=request.POST['name'], quote=request.POST['quote'])
+        this_user = User.objects.get(id=request.session['id'])
+        this_item.others.add(this_user)
+    else:
+        messages.error(request, 'Please enter a Quote Author and Quote!') 
+        return redirect('/users/dashboard')   
+    return redirect('/users/dashboard') 
+    
+
+def quote(request, id):
+    context = {
+        'username': User.objects.get(id=id),
+        'quotes': Quotes.objects.filter(user_id=id)
+    }
+    return render(request, 'exam/quote.html', context)      
+
+def delete(request, id):
+    item = Quotes.objects.get(id=id)   
+    item.delete()
+    return redirect('/users/dashboard')
+
+def remove(request ,id):
+    if 'id' in request.session:
+        this_item = Quotes.objects.get(id=id)
+        this_user = User.objects.get(id=request.session['id'])
+        this_item.others.remove(this_user)
+        return redirect('/users/dashboard')  
+
+
+def add(request, id): 
+    if 'id' in request.session:
+        this_item = Quotes.objects.get(id=id)
+        this_user = User.objects.get(id=request.session['id'])
+        this_item.others.add(this_user)
+        return redirect('/users/dashboard')      
