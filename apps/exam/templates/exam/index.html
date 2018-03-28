@@ -1,0 +1,60 @@
+<!-- LOGIN PAGE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Login & Registration</title>
+    {% load static %}
+<!-- The line above tells Django to be ready to listen for static files -->
+    <link rel="stylesheet" href="{% static 'exam/css/style.css' %}" media="screen" title="no title"  charset="utf-8">
+ <!-- Put the static files in the static folder inside your app.  Django collects files within all static folders and puts them within a single folder -->    
+</head>
+
+<body>
+    <div class="wrapper">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        <div class="header">
+            <h1>Welcome!</h1>
+            <h3>Please Login or Register</h3>
+        </div>        
+        <div class="reg">     
+            <h1 class="log_reg">Registration</h1>
+            <form action="/loading" method="POST">
+                {% csrf_token %}
+                <h3 class="names">First Name:</h3>
+                <input type="text" name="fname" class="fname">
+                <h3 class="names">Last Name:</h3>
+                <input type="text" name="lname" class="lname">
+                <h3 class="names">Email:</h3>
+                <input type="text" name="email" class="email">
+                <h3 class="names">Date Hired:</h3>
+                <input type="date" name="bday" class="bday">
+                <h3 class="names">Password:</h3>
+                <input type="password" name="password" class="pword1">
+                <h3 class="names">Confirm Password:</h3>
+                <input type="password" name="password2"  class="pword2">
+                <input type="submit" value="Register" class="btn">
+            </form>
+        </div>
+        <div class="log-in">   
+            <h1 class="log_reg">Login</h1>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <div>
+                <h3 class="log">Email:</h3>
+                <input type="text" name="email" class="mail">
+                <h3 class="log">Password:</h3>
+                <input type="password" name="password" class="pass">  
+                <input type="submit" value="Login" class="btn2">
+                </div>
+            </form>
+        </div>    
+    </div>
+</body>
+</html>

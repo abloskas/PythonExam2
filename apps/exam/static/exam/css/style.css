@@ -1,0 +1,96 @@
+/* CSS FOR LOGIN PAGE */
+
+* {
+    margin: 0;
+    padding:0;
+}
+
+.wrapper {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+.fname, .lname, .email, .pword1, .pword2, .bday {
+    display: block;
+    margin: 10px;
+}
+.log-in, .reg{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.header h1 {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: royalblue;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: 420px;
+    font-size: 50px;
+}
+.header h3{
+    font-family: 'Courier New', Courier, monospace;
+    
+    font-weight: bold;
+    color: darkred;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    margin-left: 375px;
+    font-size: 30px;
+}
+input, h3 {
+display: inline-block;
+}
+
+.names, .log {
+    color: orangered;
+    margin: 5px;
+}
+
+.log_reg {
+    color: rebeccapurple;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.reg {
+    margin-top: 15px;
+    width: 400px;
+    height: auto;
+    border: 1px solid grey;
+}
+.log-in{
+    margin-top: 15px;
+    width: 500px;
+    height: auto;
+    border: 1px solid grey;
+    margin-left: 150px;
+} 
+.mail, .pass {
+    display: inline;
+    margin: 10px;  
+}
+
+.btn {
+    background-color: rgb(37, 149, 174);
+    font-family: arial;
+    font-size: 18px;
+    color: white;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 15px 65px 10px 150px;
+    border: 1px solid grey;
+    box-shadow: 5px 3px 3px #888888;
+}
+.btn2 {
+    background-color: rgb(37, 149, 174);
+    font-family: arial;
+    font-size: 18px;
+    color: white;
+    border-radius: 4px;
+    padding: 5px;
+    margin: 15px 65px 10px 215px;
+    border: 1px solid grey;
+    box-shadow: 5px 3px 3px #888888;
+}
