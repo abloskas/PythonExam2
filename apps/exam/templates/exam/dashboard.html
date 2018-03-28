@@ -25,7 +25,7 @@
                         </tr>
                         {% for g in favorites %}
                         <tr>
-                            <td>{{g.name}}: {{g.quote}}</td> <!--Item Name -->
+                            <td>{{g.name}}: "{{g.quote}}"</td> <!--Item Name -->
                             <td><a href="/users/{{g.user.id}}">{{g.user.first_name}} {{g.user.last_name}}</a></td>    
                             {% if request.session.id == g.user.id %}
                             <td><a href="/users/{{g.id}}/remove">Remove from List</a></td>  
